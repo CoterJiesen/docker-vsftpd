@@ -19,6 +19,7 @@ fi
 
 # Create home dir and update vsftpd user db:
 mkdir -p "/home/vsftpd/${FTP_USER}"
+chmod 777 "/home/vsftpd/${FTP_USER}"
 echo -e "${FTP_USER}\n${FTP_PASS}" > /etc/vsftpd/virtual_users.txt
 /usr/bin/db_load -T -t hash -f /etc/vsftpd/virtual_users.txt /etc/vsftpd/virtual_users.db
 
@@ -28,12 +29,12 @@ export LOG_FILE=`grep xferlog_file /etc/vsftpd/vsftpd.conf|cut -d= -f2`
 # stdout server info:
 if [ ! $LOG_STDOUT ]; then
 cat << EOB
-	*************************************************
-	*                                               *
-	*    Docker image: fauria/vsftd                 *
-	*    https://github.com/fauria/docker-vsftpd    *
-	*                                               *
-	*************************************************
+	******************************************************
+	*                                                    *
+	*    Docker image: fauria/vsftd                      *
+	*    https://github.com/coterjiesen/docker-vsftpd    *
+	*                                                    *
+	******************************************************
 
 	SERVER SETTINGS
 	---------------
